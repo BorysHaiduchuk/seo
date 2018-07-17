@@ -11,11 +11,18 @@
         }
     ],
     "require": {
-        "yiisoft/yii2": "~2.0.0"
+        "yiisoft/yii2": "~2.0.0",
+        "boryshaiduchuk/yii2-lang-behavior" : "*"
     },
     "autoload": {
         "psr-4": {
-            "boryshaiduchuk\\seo\\": ""
+            "boryshaiduchuk\\seo\\": "src/"
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/BorysHaiduchuk/LangBehavior.git"
+        }
+    ]
 }
