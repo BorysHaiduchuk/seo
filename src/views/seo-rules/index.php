@@ -4,12 +4,12 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 
-
 /* @var $this yii\web\View */
-/* @var $searchModel backend\modules\seo\models\SeoRulesSearch */
+/* @var $searchModel boryshaiduchuk\seo\models\SeoRulesSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Seo Rules';
+$this->title = Yii::t('seo', 'Seo Rules');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('seo', 'Seo module'), 'url' => ['/seo']];
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <span>
-        <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i>' .' Create', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="fa fa-plus" aria-hidden="true"></i>' . Yii::t('seo', 'Create'), ['create'], ['class' => 'btn btn-success']) ?>
     </span>
 
     <div class="pull-right">
@@ -27,8 +27,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'class'=>'table table-custom dataTable no-footer',
-        'tableOptions'=>['class'=>'table table-custom dataTable no-footer'],
+        'class' => 'table table-custom dataTable no-footer',
+        'tableOptions' => ['class' => 'table table-custom dataTable no-footer'],
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],

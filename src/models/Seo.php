@@ -22,7 +22,6 @@ use Yii;
  */
 class Seo extends \yii\db\ActiveRecord
 {
-
     public $title;
     public $description;
     public $h1;
@@ -56,6 +55,9 @@ class Seo extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
@@ -63,6 +65,7 @@ class Seo extends \yii\db\ActiveRecord
                 'class' => LangBehavior::className(),
                 't' => new SeoLang(),
                 'fk' => 'record_id',
+                'l' => Yii::$app->getModule('seo')->lang_id
             ],
         ];
     }
@@ -73,14 +76,14 @@ class Seo extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'table_name' => Yii::t('app', 'Table Name'),
-            'seo_rules_id' => Yii::t('app', 'Seo Rules ID'),
-            'model_id' => Yii::t('app', 'Record ID'),
-            'og_image' => Yii::t('app', 'Og Image'),
-            'redirect_301' => Yii::t('app', 'Redirect 301'),
-            'meta_index' => Yii::t('app', 'Meta Index'),
-            're_generate' => Yii::t('app', 'Re generate after update'),
+            'id' => Yii::t('seo', 'ID'),
+            'table_name' => Yii::t('seo', 'Table Name'),
+            'seo_rules_id' => Yii::t('seo', 'Seo Rules ID'),
+            'model_id' => Yii::t('seo', 'Record ID'),
+            'og_image' => Yii::t('seo', 'Og Image'),
+            'redirect_301' => Yii::t('seo', 'Redirect 301'),
+            'meta_index' => Yii::t('seo', 'Meta Index'),
+            're_generate' => Yii::t('seo', 'Re generate after update'),
         ];
     }
 
@@ -92,19 +95,4 @@ class Seo extends \yii\db\ActiveRecord
         return $this->hasOne(SeoRules::className(), ['id' => 'seo_rules_id']);
     }
 
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getSeoLangs()
-    {
-        return $this->hasMany(SeoLang::className(), ['record_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getLangs()
-    {
-        return $this->hasMany(Lang::className(), ['id' => 'lang_id'])->viaTable('seo_lang', ['record_id' => 'id']);
-    }
 }

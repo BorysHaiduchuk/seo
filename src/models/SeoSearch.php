@@ -5,7 +5,7 @@ namespace boryshaiduchuk\seo\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\seo\models\Seo;
+use boryshaiduchuk\seo\models\Seo;
 
 /**
  * SeoSearch represents the model behind the search form of `backend\modules\seo\models\Seo`.
@@ -19,7 +19,7 @@ class SeoSearch extends Seo
     {
         return [
             [['id', 'seo_rules_id', 'model_id', 're_generate'], 'integer'],
-            [['table_name', 'og_image', 'redirect_301', 'meta_index'], 'safe'],
+            [['table_name', 'og_image', 'redirect_301', 'meta_index', 'title', 'description', 'keywords', 'h1'], 'safe'],
         ];
     }
 
@@ -68,7 +68,11 @@ class SeoSearch extends Seo
         $query->andFilterWhere(['like', 'table_name', $this->table_name])
             ->andFilterWhere(['like', 'og_image', $this->og_image])
             ->andFilterWhere(['like', 'redirect_301', $this->redirect_301])
-            ->andFilterWhere(['like', 'meta_index', $this->meta_index]);
+            ->andFilterWhere(['like', 'meta_index', $this->meta_index])
+            ->andFilterWhere(['like', 'title', $this->meta_index])
+            ->andFilterWhere(['like', 'description', $this->meta_index])
+            ->andFilterWhere(['like', 'h1', $this->h1])
+            ->andFilterWhere(['like', 'keywords', $this->meta_index]);
 
         return $dataProvider;
     }

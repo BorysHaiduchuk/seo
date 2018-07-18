@@ -1,12 +1,22 @@
-Seo
-===
 Seo module
+===
+Seo module for managing redirects. Generate by template and edit title, description, keyword, og: title, og: description, og: image.
 
 Installation
 ------------
 
 The preferred way to install this extension is through [composer](http://getcomposer.org/download/).
 
+Add composer.json
+```
+  "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/BorysHaiduchuk/seo.git"
+        }
+
+    ]
+```
 Either run
 
 ```
@@ -28,4 +38,9 @@ Usage
 Once the extension is installed, simply use it in your code by  :
 
 ```php
-<?= \boryshaiduchuk\seo\AutoloadExample::widget(); ?>```
+  'modules' => [
+            'seo' => [
+                'class' => 'boryshaiduchuk\seo\Module',
+                'lang_id' => 1
+            ]
+        ],```

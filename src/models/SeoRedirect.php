@@ -39,9 +39,9 @@ class SeoRedirect extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
-            'from_url' => Yii::t('app', 'From Url'),
-            'to_url' => Yii::t('app', 'To Url'),
+            'id' => Yii::t('seo', 'ID'),
+            'from_url' => Yii::t('seo', 'From Url'),
+            'to_url' => Yii::t('seo', 'To Url'),
         ];
     }
 }

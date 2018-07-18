@@ -3,12 +3,12 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\seo\models\SeoRules */
+/* @var $model boryshaiduchuk\seo\models\SeoRules */
 
-$this->title = 'Update : '. $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Seo Rules', 'url' => ['index']];
+$this->title = Yii::t('seo', 'Update : {name}', ['name' => $model->name]);
+$this->params['breadcrumbs'][] = ['label' => Yii::t('seo', 'Seo Rules'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Update';
+$this->params['breadcrumbs'][] = Yii::t('seo', 'Update');
 ?>
 <div class="seo-rules-update">
 

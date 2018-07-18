@@ -2,7 +2,11 @@
 namespace boryshaiduchuk\seo\service;
 
 use Yii;
+use yii\web\UrlManager;
 
+/**
+ * Class to generate a site map
+ */
 class Sitemap
 {
     const ALWAYS = 'always';
@@ -16,11 +20,21 @@ class Sitemap
     protected $items = array();
     protected $urlManager;
 
-    public function __construct($urlManager)
+    /**
+     * Sitemap constructor.
+     * @param UrlManager $urlManager
+     */
+    public function __construct(UrlManager $urlManager)
     {
         $this->urlManager = $urlManager;
     }
 
+    /**
+     * @param $url
+     * @param string $changeFreq
+     * @param float $priority
+     * @param int $lastMod
+     */
     public function addUrl($url, $changeFreq = self::DAILY, $priority = 0.7, $lastMod = 0)
     {
         $host = Yii::$app->request->getHostInfo();
@@ -35,6 +49,12 @@ class Sitemap
         $this->items[] = $item;
     }
 
+
+    /**
+     * @param $models
+     * @param string $changeFreq
+     * @param float $priority
+     */
     public function addModels($models, $changeFreq=self::DAILY, $priority = 0.7)
     {
         $host = Yii::$app->request->getHostInfo();
@@ -54,6 +74,10 @@ class Sitemap
         }
     }
 
+    /**
+     * Render xml
+     * @return string
+     */
     public function render()
     {
         $dom = new \DOMDocument('1.0', 'utf-8');
@@ -75,6 +99,10 @@ class Sitemap
         return $dom->saveXML();
     }
 
+    /**
+     * @param $date
+     * @return false|string
+     */
     protected function dateToW3C($date)
     {
         if (is_int($date))

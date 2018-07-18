@@ -50,14 +50,14 @@ class SeoLang extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'lang_id' => Yii::t('app', 'Lang ID'),
-            'record_id' => Yii::t('app', 'Record ID'),
-            'h1' => Yii::t('app', 'H1'),
-            'keywords' => Yii::t('app', 'Keywords'),
-            'title' => Yii::t('app', 'Title'),
-            'description' => Yii::t('app', 'Description'),
-            'og_title' => Yii::t('app', 'Og Title'),
-            'og_description' => Yii::t('app', 'Og Description'),
+            'lang_id' => Yii::t('seo', 'Lang ID'),
+            'record_id' => Yii::t('seo', 'Record ID'),
+            'h1' => Yii::t('seo', 'H1'),
+            'keywords' => Yii::t('seo', 'Keywords'),
+            'title' => Yii::t('seo', 'Title'),
+            'description' => Yii::t('seo', 'Description'),
+            'og_title' => Yii::t('seo', 'Og Title'),
+            'og_description' => Yii::t('seo', 'Og Description'),
         ];
     }
 

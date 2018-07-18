@@ -5,10 +5,10 @@ use yii\widgets\ActiveForm;
 
 
 /* @var $this yii\web\View */
-/* @var $model backend\modules\seo\models\SeoRules */
+/* @var $model boryshaiduchuk\seo\models\SeoRules */
 
-$this->title = 'Create Seo Rules';
-$this->params['breadcrumbs'][] = ['label' => 'Seo Rules', 'url' => ['index']];
+$this->title = Yii::t('seo', 'Create Seo Rules');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('seo', 'Seo Rules'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="seo-rules-create">
@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
         <div class="form-group">
-            <?= Html::submitButton('<i class="glyphicon glyphicon-floppy-disk"></i> '.'Save', ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('<i class="glyphicon glyphicon-floppy-disk"></i> ' . Yii::t('seo', 'Save'), ['class' => 'btn btn-success']) ?>
         </div>
 
         <?php ActiveForm::end(); ?>

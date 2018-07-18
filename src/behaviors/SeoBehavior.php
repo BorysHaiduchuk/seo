@@ -9,13 +9,35 @@ use yii\base\Behavior;
 use yii\db\ActiveRecord;
 use yii\helpers\Url;
 
+/**
+ * Behavior for working with seo fields
+ */
 class SeoBehavior extends Behavior
 {
+    /**
+     * SeoRules record id
+     * @var int
+     */
     public $seo_rules_id;
-    public $rules;
+
+    /**
+     * @var array
+     */
     public $variables = [];
+
+    /**
+     * @var SeoRules
+     */
+    protected $rules;
+
+    /**
+     * List of fields to fill in
+     */
     protected $replaceColumns = ['title', 'h1', 'description', 'og_title', 'og_description', 'keywords'];
 
+    /**
+     * @inheritdoc
+     */
     public function events()
     {
         return [
@@ -24,9 +46,14 @@ class SeoBehavior extends Behavior
         ];
     }
 
+    /**
+     * Field generation
+     */
     public function generate()
     {
+
         $rules = SeoRules::findOne(['id' => $this->seo_rules_id, 'status' => SeoRules::STATUS_ACTIVE]);
+
         $seoModel = $this->getSeoModel();
         if ($seoModel->isNewRecord) {
             $seoModel->re_generate = $rules->re_generate;
@@ -37,6 +64,11 @@ class SeoBehavior extends Behavior
         }
     }
 
+    /**
+     * Fill the fields by template
+     * @param $seoModel
+     * @param $rules
+     */
     protected function replaceColumns($seoModel, $rules)
     {
         foreach ($this->replaceColumns as $key => $value) {
@@ -44,6 +76,12 @@ class SeoBehavior extends Behavior
         }
     }
 
+    /**
+     * Replace keys with values
+     * @param $template
+     * @param $rules
+     * @return string
+     */
     protected function replaceKeys($template, $rules)
     {
         $attributeValue = $rules->$template;
@@ -55,6 +93,10 @@ class SeoBehavior extends Behavior
         return $attributeValue;
     }
 
+    /**
+     * Receiving the seo model for the current record
+     * @return Seo|null
+     */
     public function getSeoModel()
     {
         $condition = [
@@ -62,21 +104,27 @@ class SeoBehavior extends Behavior
             'seo_rules_id' => $this->seo_rules_id,
             'table_name' => $this->owner::tableName()
         ];
+
         $model = Seo::findOne($condition);
+
         if (!$model) {
             $model = new Seo($condition);
         }
         return $model;
     }
 
+    /**
+     * Setting seo parameters for the page
+     */
     public function setSeoData()
     {
         $seo = $this->getSeoModel();
         $view = \Yii::$app->view;
 
-        if (! $seo) {
-            return $seo;
+        if (!$seo) {
+            return;
         }
+
 
         if (!empty($seo->title)) {
             $view->title = $seo->title;
@@ -113,6 +161,5 @@ class SeoBehavior extends Behavior
                 $view->registerMetaTag(['property' => 'og:image:height', 'content' => $height]);
             }
         }
-
     }
 }

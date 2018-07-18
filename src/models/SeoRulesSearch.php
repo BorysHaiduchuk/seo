@@ -5,7 +5,7 @@ namespace boryshaiduchuk\seo\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use backend\modules\seo\models\SeoRules;
+use boryshaiduchuk\seo\models\SeoRules;
 
 /**
  * SeoRulesSearch represents the model behind the search form of `backend\modules\seo\models\SeoRules`.

@@ -11,7 +11,13 @@ class Module extends \yii\base\Module
     /**
      * @inheritdoc
      */
-    public $controllerNamespace = 'backend\modules\seo\controllers';
+    public $controllerNamespace = 'boryshaiduchuk\seo\controllers';
+
+    /**
+     * Aplication lang_id
+     * @var int
+     */
+    public $lang_id;
 
     /**
      * @inheritdoc

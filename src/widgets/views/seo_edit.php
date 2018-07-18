@@ -2,6 +2,7 @@
 
 use yii\widgets\ActiveForm;
 use yii\helpers\Html;
+use mihaildev\elfinder\InputFile;
 
 ?>
 
@@ -23,7 +24,7 @@ use yii\helpers\Html;
 
         <?= $form->field($model, 'h1')->textInput() ?>
 
-        <?= $form->field($model, 'keywords')->textarea()  ?>
+        <?= $form->field($model, 'keywords')->textarea() ?>
 
         <?= $form->field($model, 'og_title')->textInput() ?>
 
@@ -33,15 +34,14 @@ use yii\helpers\Html;
 
         <div class="row">
             <div class="col-md-4">
-                <?= $form->field($model, 'og_image')->widget(\backend\widgets\MainInputFile::className(), [
+                <?= $form->field($model, 'og_image')->widget(InputFile::className(), [
                     'language' => 'ru',
-                    'path' => 'page/images',
-                    'controller' => '/elfinder', // вставляем название контроллера, по умолчанию равен elfinder
-                    // фильтр файлов, можно задать массив фильтров https://github.com/Studio-42/elFinder/wiki/Client-configuration-options#wiki-onlyMimes
-                    'template' => '<div class="file-input-image"><div class="img">{image}</div> <div class="input-group">{input}<span class="input-group-btn">{button}</span></div> </div> ',
+                    'path' => 'news',
+                    'controller' => '/elfinder',
+                    'template' => '<div class="file-input-image"><div class="input-group">{input}<span class="input-group-btn">{button}</span></div> </div> ',
                     'options' => ['class' => 'form-control'],
-                    'buttonOptions' => ['class' => 'btn btn-default'],
-                    'multiple' => false       // возможность выбора нескольких файлов
+                    'buttonOptions' => ['class' => 'btn btn-news'],
+                    'multiple' => false
                 ])->label(false); ?>
             </div>
         </div>
@@ -50,11 +50,8 @@ use yii\helpers\Html;
     <div class="col-md-4">
         <div class="form-group">
             <br>
-            <?= Html::submitButton('<i class="glyphicon glyphicon-floppy-disk"></i> ' . Yii::t('app', 'Save'), ['class' => 'btn btn-success']) ?>
+            <?= Html::submitButton('<i class="glyphicon glyphicon-floppy-disk"></i> ' . Yii::t('seo', 'Save'), ['class' => 'btn btn-success']) ?>
         </div>
     </div>
-
-
     <?php ActiveForm::end() ?>
 </div>
-<?= $this->registerJs('valiadModalForm("form-seo-edit");'); ?>

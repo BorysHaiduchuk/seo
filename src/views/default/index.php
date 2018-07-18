@@ -1,12 +1,25 @@
+<?php
+
+use yii\bootstrap\Html;
+
+$this->title = Yii::t('seo', 'Seo module');
+?>
 <div class="seo-default-index">
-    <h1><?= $this->context->action->uniqueId ?></h1>
-    <p>
-        This is the view content for action "<?= $this->context->action->id ?>".
-        The action belongs to the controller "<?= get_class($this->context) ?>"
-        in the "<?= $this->context->module->id ?>" module.
-    </p>
-    <p>
-        You may customize this page by editing the following file:<br>
-        <code><?= __FILE__ ?></code>
-    </p>
+    <h1><?= Yii::t('seo', 'Seo module') ?></h1>
+    <div>
+        <ul>
+            <li>
+                <?= Html::a(Yii::t('seo', 'Seo redirect'), ['seo-redirect/index']) ?> -
+                <?= Yii::t('seo', 'Setting up redirects for pages') ?>
+            </li>
+            <li>
+                <?= Html::a(Yii::t('seo', 'Seo rules'), ['seo-rules/index']) ?> -
+                <?= Yii::t('seo', 'Generation rules for seo tags') ?>
+            </li>
+            <li>
+                <?= Html::a(Yii::t('seo', 'Seo data'), ['seo/index']) ?> -
+                <?= Yii::t('seo', 'Generation rules for seo tags') ?>
+            </li>
+        </ul>
+    </div>
 </div>

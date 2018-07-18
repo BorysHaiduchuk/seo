@@ -19,6 +19,13 @@ class DefaultController extends Controller
         return $this->render('index');
     }
 
+    /**
+     * Edit seо data
+     * @param $model_id
+     * @param $table_name
+     * @param $seo_rules_id
+     * @return \yii\web\Response
+     */
     public function actionEditSeo($model_id, $table_name, $seo_rules_id)
     {
         $condition = [
@@ -34,10 +41,7 @@ class DefaultController extends Controller
         }
 
         if ($model->load(\Yii::$app->request->post()) && $model->save()) {
-            return $this->asJson([
-                'success' => true,
-                'message' => \Yii::t('app', 'Seo data saved successfully'),
-            ]);
+            return $this->redirect(\Yii::$app->request->getReferrer());
         }
     }
 }

@@ -11,6 +11,7 @@ class m180418_070152_seo_module extends Migration
     public $seo_rules_lang = '{{seo_rules_lang}}';
     public $seo = '{{seo}}';
     public $seo_lang = '{{seo_lang}}';
+    public $seo_redirect = '{{seo_redirect}}';
 
     public function safeUp()
     {
@@ -69,6 +70,12 @@ class m180418_070152_seo_module extends Migration
         $this->addPrimaryKey('seo_lang-pk', $this->seo_lang, ['record_id', 'lang_id']);
         $this->addForeignKey('seo_lang_record-id', $this->seo_lang, 'record_id', $this->seo, 'id', 'CASCADE');
         $this->addForeignKey('seo_lang_lang-id', $this->seo_lang, 'lang_id', '{{lang}}', 'id', 'CASCADE');
+
+        $this->createTable($this->seo_redirect, [
+            'id' => $this->primaryKey(),
+            'from_url' => $this->string(500)->notNull(),
+            'to_url' => $this->string(500)->notNull(),
+        ]);
     }
 
     /**

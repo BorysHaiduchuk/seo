@@ -57,6 +57,11 @@ class SeoRulesController extends Controller
         ]);
     }
 
+    /**
+     * Re-generating data for a specific rule
+     * @param integer $id
+     * @return \yii\web\Response
+     */
     public function actionGenerate($id)
     {
         $model = $this->findModel($id);

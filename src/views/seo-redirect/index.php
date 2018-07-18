@@ -8,10 +8,11 @@ use yii\widgets\Pjax;
 use yii\helpers\Url;
 
 /* @var $this yii\web\View */
-/* @var $searchModel backend\modules\seo\models\SeoSearch */
+/* @var $searchModel boryshaiduchuk\seo\models\SeoSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = Yii::t('app', 'Redirect');
+$this->title = Yii::t('seo', 'Redirect');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('seo', 'Seo module'), 'url' => ['/seo']];
 $this->params['breadcrumbs'][] = $this->title;
 
 
@@ -24,8 +25,8 @@ $this->params['breadcrumbs'][] = $this->title;
             <thead>
             <tr>
                 <th></th>
-                <th>From url</th>
-                <th>To url</th>
+                <th><?= Yii::t('seo', 'From url') ?></th>
+                <th><?= Yii::t('seo', 'To url') ?></th>
             </tr>
             </thead>
             <tbody>
@@ -34,7 +35,6 @@ $this->params['breadcrumbs'][] = $this->title;
                     <td><?= $key + 1; ?></td>
                     <td><?= $form->field($value, "[$key]from_url")->label(false) ?> </td>
                     <td><?= $form->field($value, "[$key]to_url")->label(false) ?>  </td>
-
                     <td>
                         <?php if (!$value->isNewRecord): ?>
                             <a class="btn btn-danger btn-xs" href="<?= Url::to(['delete', 'id' => $value->id]) ?>"><i
@@ -47,8 +47,8 @@ $this->params['breadcrumbs'][] = $this->title;
         </table>
     </div>
     <div class="form-group">
-        <?= Html::submitButton('<i class="glyphicon glyphicon-floppy-disk"></i> ' . 'Save', ['class' => 'btn btn-success']) ?>
-        <?= Html::a('<i class="fa fa-plu"></i> Add', ['index', 'add_new' => $add_new + 1], ['class' => 'btn btn-primary ']) ?>
+        <?= Html::submitButton('<i class="glyphicon glyphicon-floppy-disk"></i> ' . Yii::t('seo', 'Save'), ['class' => 'btn btn-success']) ?>
+        <?= Html::a('<i class="fa fa-plu"></i> ' . Yii::t('seo', 'Add'), ['index', 'add_new' => $add_new + 1], ['class' => 'btn btn-primary ']) ?>
     </div>
     <?php ActiveForm::end() ?>
     <?php Pjax::end() ?>

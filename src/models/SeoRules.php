@@ -2,7 +2,7 @@
 
 namespace boryshaiduchuk\seo\models;
 
-use common\behaviors\LangBehavior;
+use boryshaiduchuk\langbehavior\LangBehavior;
 use Yii;
 use common\models\Lang;
 use yii\behaviors\TimestampBehavior;
@@ -46,6 +46,9 @@ class SeoRules extends \yii\db\ActiveRecord
         return 'seo_rules';
     }
 
+    /**
+     * @inheritdoc
+     */
     public function behaviors()
     {
         return [
@@ -53,6 +56,7 @@ class SeoRules extends \yii\db\ActiveRecord
                 'class' => LangBehavior::className(),
                 't' => new SeoRulesLang(),
                 'fk' => 'record_id',
+                'l' => Yii::$app->getModule('seo')->lang_id
             ],
             TimestampBehavior::className()
         ];
@@ -95,14 +99,6 @@ class SeoRules extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSeos()
-    {
-        return $this->hasMany(Seo::className(), ['seo_rules_id' => 'id']);
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
     public function getSeoRulesLangs()
     {
         return $this->hasMany(SeoRulesLang::className(), ['record_id' => 'id']);
@@ -116,6 +112,10 @@ class SeoRules extends \yii\db\ActiveRecord
         return $this->hasMany(Lang::className(), ['id' => 'lang_id'])->viaTable('seo_rules_lang', ['record_id' => 'id']);
     }
 
+    /**
+     * Status list
+     * @return array
+     */
     public static function getStatusList()
     {
         return [
@@ -124,11 +124,21 @@ class SeoRules extends \yii\db\ActiveRecord
         ];
     }
 
+    /**
+     * Status detail
+     * @return mixed|string
+     */
     public function getStatusDetail()
     {
         return isset(static::getStatusList()[$this->status]) ? static::getStatusList()[$this->status] : '';
     }
 
+    /**
+     * Retrieving all statuses
+     * @param bool $map
+     * @param null $limit
+     * @return array|\yii\db\ActiveRecord[]
+     */
     static public function getRulesAll($map = false, $limit = null)
     {
         $query = self::find()->where(['status' => self::STATUS_ACTIVE]);
